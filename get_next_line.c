@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -16,22 +16,22 @@
 
 static char	*read_lines(int fd, char *buf, char *save)
 {
-	int	read;
-	int	*aux;
+	int	read_line;
+	char	*aux;
 
-	read = 1;
-	while (read != '\0')
+	read_line = 1;
+	while (read_line != '\0')
 	{
-		read = read(fd, buf, BUFFER_SIZE);
-		if (read == -1)
+		read_line = read(fd, buf, BUFFER_SIZE);
+		if (read_line == -1)
 			return (0);
-		else if (read == 0)
+		else if (read_line == 0)
 			break ;
 			aux = save;
 		save = ft_strjoin(aux, buf);
 		free(aux);
 		aux = NULL;
-	 if(strchr ( buf, '\n'))
+	 if(ft_strchr ( buf, '\n'))
 	 break;
 	 }
 	 return (save);
@@ -55,5 +55,23 @@ char	*get_next_line(int fd)
 	buf = NULL;
 	if (!line)
 		return (NULL);
-	save =
+}
+
+
 	
+int main(int argc, char **argv)
+{
+   int     fd;
+   char    *line;
+ 
+   (void)argc; 
+   fd = open(argv[1], O_RDONLY); 
+   line = ""; 
+   while (line != NULL)
+   {
+       line = get_next_line(fd);
+       printf("%s", line);
+   }
+   fd = close(fd);
+   return (0);
+}
