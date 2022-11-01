@@ -20,7 +20,7 @@ static char	*read_lines(int fd, char *buf, char *save)
 	char	*aux;
 
 	read_line = 1;
-	while (read_line != '\0')
+	while (!read_line)
 	{
 		read_line = read(fd, buf, BUFFER_SIZE);
 		if (read_line == -1)
@@ -55,6 +55,7 @@ char	*get_next_line(int fd)
 	buf = NULL;
 	if (!line)
 		return (NULL);
+	return (line);
 }
 
 
