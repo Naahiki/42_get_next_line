@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,72 +6,95 @@
 /*   By: nrodrigu <nrodrigu@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:55:55 by nrodrigu          #+#    #+#             */
-/*   Updated: 2022/10/26 20:08:48 by nrodrigu         ###   ########.fr       */
+/*   Updated: 2022/11/06 20:37:28 by nrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "get_next_line.h"
 
-static char	*read_lines(int fd, char *buf, char *save)
+static char	*read_lines(int fd, char *buf, char *stash)
 {
-	int	read_line;
+	int		read_line;
 	char	*aux;
 
 	read_line = 1;
-	while (!read_line)
+	while (read_line > 0)
 	{
 		read_line = read(fd, buf, BUFFER_SIZE);
 		if (read_line == -1)
 			return (0);
 		else if (read_line == 0)
 			break ;
-			aux = save;
-		save = ft_strjoin(aux, buf);
+		if (!stash)
+		{
+			stash = (char *)malloc(sizeof(char) * 1);
+			stash[0] = '\0';
+		}
+		buf[read_line] = '\0';
+		aux = stash;
+		stash = ft_strjoin(aux, buf);
 		free(aux);
 		aux = NULL;
-	 if(ft_strchr ( buf, '\n'))
-	 break;
-	 }
-	 return (save);
+		if (ft_strchr(buf, '\n'))
+			break ;
+	}
+	return (stash);
 }
 
+char	*get_line(char *line)
+{
+	int		i;
+	char	*stash;
 
+	i = 0;
+	while (line[i] && line[i] != '\n')
+		i++;
+	if (line[i] == '\0')
+		return (0);
+	stash = ft_substr(line, i + 1, ft_strlen(line) - i);
+	if (*stash == '\0')
+	{
+		free(stash);
+		stash = NULL;
+	}
+	line[i + 1] = '\0';
+	return (stash);
+}
 
 char	*get_next_line(int fd)
 {
-	char	*line;
-	char	*buf;
-	static char	*save;
+	char		*line;
+	char		*buf;
+	static char	*stash;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
-	buf = (char *)malloc(sizeof(char)* (BUFFER_SIZE + 1));
+	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buf)
 		return (0);
-	line = read_lines(fd, buf, save);
+	line = read_lines(fd, buf, stash);
 	free(buf);
 	buf = NULL;
 	if (!line)
-		return (NULL);
+		return (0);
+	stash = get_line(line);
 	return (line);
 }
 
-
-	
-int main(int argc, char **argv)
+/*int main(void)
 {
    int     fd;
    char    *line;
  
-   (void)argc; 
-   fd = open(argv[1], O_RDONLY); 
+   
+   fd = open("fichero.txt", O_RDONLY); 
+   //printf( "Number of fd is: %d", fd);
    line = ""; 
    while (line != NULL)
    {
        line = get_next_line(fd);
-       printf("%s", line);
+       printf( "%s", line);
    }
    fd = close(fd);
-   return (0);
-}
+  }
+*/

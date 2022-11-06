@@ -1,27 +1,23 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nrodrigu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nrodrigu <nrodrigu@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:56:16 by nrodrigu          #+#    #+#             */
-/*   Updated: 2022/10/23 18:33:07 by nrodrigu         ###   ########.fr       */
+/*   Updated: 2022/11/06 20:42:45 by nrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <stddef.h>
+#include "get_next_line.h"
 
 size_t	ft_strlen(const char *s)
 {
 	size_t	i;
+
 	i = 0;
-	while(s[i] != 0)
+	while (s[i] != 0)
 		i++;
 	return (i);
 }
@@ -47,18 +43,18 @@ char	*ft_strdup(const char *s1)
 
 char	*ft_strchr(const char *s, int c)
 {
-	int	i;
+	int		i;
 	char	*str;
 
 	str = (char *)s;
 	i = 0;
-	while(str [i] != '\0')
+	while (str [i] != '\0')
 	{
 		if (str[i] == (unsigned char)c)
-			return(&str[i]);
+			return (&str[i]);
 		i++;
 	}
-	if((unsigned char)c == '\0')
+	if ((unsigned char)c == '\0')
 		return (&str[i]);
 	return (NULL);
 }
@@ -89,4 +85,33 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		str1[i++] = s2[x];
 	str1[i] = '\0';
 	return (str1);
-}	 
+}
+
+*char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char			*s_new;
+	unsigned int	i;
+
+	if (s == NULL)
+		return (NULL);
+	if (len > ft_strlen (s))
+		len = ft_strlen(s);
+	i = 0;
+	s_new = (char *)malloc(sizeof(char) * (len + 1));
+	if (!s_new)
+		return (NULL);
+	while (start > ft_strlen(s))
+	{
+		*s_new = '\0';
+		return (s_new);
+	}
+	while (len > 0)
+	{
+		s_new[i] = s[start];
+		i++;
+		start++;
+		len--;
+	}
+	s_new[i] = '\0';
+	return (s_new);
+}
