@@ -6,7 +6,7 @@
 /*   By: nrodrigu <nrodrigu@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:56:16 by nrodrigu          #+#    #+#             */
-/*   Updated: 2022/11/06 20:42:45 by nrodrigu         ###   ########.fr       */
+/*   Updated: 2022/11/07 18:00:47 by nrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (str1);
 }
 
-*char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char			*s_new;
 	unsigned int	i;
