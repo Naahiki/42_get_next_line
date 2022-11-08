@@ -6,7 +6,7 @@
 /*   By: nrodrigu <nrodrigu@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:57:27 by nrodrigu          #+#    #+#             */
-/*   Updated: 2022/11/06 20:17:11 by nrodrigu         ###   ########.fr       */
+/*   Updated: 2022/11/08 18:34:59 by nrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <fcntl.h>
 # include <stdlib.h>
 
+ # ifndef BUFFER_SIZE 
+ # define BUFFER_SIZE 42
+ # endif
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char	*s1);
 char	*ft_strchr(const char *s, int c);

@@ -6,7 +6,7 @@
 /*   By: nrodrigu <nrodrigu@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:55:55 by nrodrigu          #+#    #+#             */
-/*   Updated: 2022/11/07 18:01:44 by nrodrigu         ###   ########.fr       */
+/*   Updated: 2022/11/08 18:37:53 by nrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,20 +81,3 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-/*int main(void)
-{
-   int     fd;
-   char    *line;
- 
-   
-   fd = open("fichero.txt", O_RDONLY); 
-   //printf( "Number of fd is: %d", fd);
-   line = ""; 
-   while (line != NULL)
-   {
-       line = get_next_line(fd);
-       printf( "%s", line);
-   }
-   fd = close(fd);
-  }
-*/
