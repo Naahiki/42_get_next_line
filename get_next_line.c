@@ -6,7 +6,7 @@
 /*   By: nrodrigu <nrodrigu@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:55:55 by nrodrigu          #+#    #+#             */
-/*   Updated: 2022/11/08 19:51:44 by nrodrigu         ###   ########.fr       */
+/*   Updated: 2022/11/10 19:30:14 by nrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ static char	*read_lines(int fd, char *buf, char *stash)
 	while (read_line > 0)
 	{
 		read_line = read(fd, buf, BUFFER_SIZE);
-		if (read_line == -1)
+		if (read_line < 0)
 		{
+		//	free(buf);
 			return (0);	
 		}
 		else if (read_line == 0)
@@ -78,7 +79,12 @@ char	*get_next_line(int fd)
 	free(buf);
 	buf = NULL;
 	if (!line)
+	{
+		free(stash);
+		stash = NULL;
 		return (0);
+	}
+		
 	stash = asd(line);
 	return (line);
 }
