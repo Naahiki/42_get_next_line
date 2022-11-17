@@ -6,7 +6,7 @@
 /*   By: nrodrigu <nrodrigu@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 12:55:55 by nrodrigu          #+#    #+#             */
-/*   Updated: 2022/11/10 19:30:14 by nrodrigu         ###   ########.fr       */
+/*   Updated: 2022/11/13 19:45:47 by nrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@ static char	*read_lines(int fd, char *buf, char *stash)
 	{
 		read_line = read(fd, buf, BUFFER_SIZE);
 		if (read_line < 0)
-		{
-		//	free(buf);
-			return (0);	
-		}
+			return (0);
 		else if (read_line == 0)
 			break ;
 		if (!stash)
@@ -44,7 +41,7 @@ static char	*read_lines(int fd, char *buf, char *stash)
 	return (stash);
 }
 
-char	*asd(char *line)
+char	*get_lines(char *line)
 {
 	int		i;
 	char	*stash;
@@ -77,15 +74,12 @@ char	*get_next_line(int fd)
 		return (0);
 	line = read_lines(fd, buf, stash);
 	free(buf);
-	buf = NULL;
 	if (!line)
 	{
 		free(stash);
 		stash = NULL;
 		return (0);
 	}
-		
-	stash = asd(line);
+	stash = get_lines(line);
 	return (line);
 }
-
